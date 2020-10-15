@@ -7,7 +7,7 @@
             :disabled="item.disabled">{{item.name}}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item size="large">
+      <el-form-item size="large" v-if="info.url">
       <el-image :src="info.url"></el-image>
       </el-form-item>
       <el-form-item size="large">
