@@ -5,7 +5,9 @@
         <basic-info-form ref="basicInfo" :info="info" />
       </el-tab-pane>
       <el-tab-pane label="字段信息" name="cloum">
+        <el-button type="primary" @click="addRow">增加</el-button>
         <el-table ref="dragTable" :data="cloumns" row-key="columnId" :max-height="tableHeight">
+          
           <el-table-column label="序号" type="index" min-width="5%" class-name="allowDrag" />
           <el-table-column
             label="字段列名"
@@ -108,8 +110,12 @@
               </el-select>
             </template>
           </el-table-column>
-        </el-table>
-      </el-tab-pane>
+        <el-table-column fixed="right" label="操作" width="200" align="center" class-name="small-padding fixed-width">
+            <template slot-scope="scope">
+              <el-button icon="el-icon-delete" @click="delRow(scope.row)" type="text" size="small" >删除</el-button>
+            </template>
+          </el-table-column>
+      </el-table>
       <el-tab-pane label="生成信息" name="genInfo">
         <gen-info-form ref="genInfo" :info="info" :menus="menus"/>
       </el-tab-pane>
@@ -171,6 +177,14 @@ export default {
     }
   },
   methods: {
+    addRow(){
+      console.log(this.cloumns[this.cloumns.length-1])
+      this.cloumns.push(this.toCopy(this.cloumns[this.cloumns.length-1]))
+      console.log(this.cloumns)
+    },
+    delRow(row){
+
+    },
     /** 提交按钮 */
     submitForm() {
       const basicForm = this.$refs.basicInfo.$refs.basicInfoForm;
